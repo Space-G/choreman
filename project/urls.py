@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+"""
+Since Django iterates over urlpatterns only until it finds one match putting 'admin/' 
+before '' makes so we check everything in choreman.urls unless path starts with 'admin/'
+"""
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("", include("choreman.urls")),
 ]
