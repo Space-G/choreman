@@ -2,12 +2,13 @@ from django.db import models
 
 
 class User(models.Model):
-    login_name = models.CharField(primary_key = True, max_length = 254) # max email address length
-    nickname = models.CharField(max_length = 64)
+    """TODO: learn about Django's auth module. That's why there's nothing like a "hashed password" field"""
+    login_name = models.CharField("username used to login", primary_key = True, max_length = 254) # max email address length
+    nickname = models.CharField("name shown", max_length = 64)
     registration_datetime = models.DateTimeField()
 
 class Chore(models.Model):
-    owner = models.ForeignKey(User, on_delete = models.CASCADE)
+    creator = models.ForeignKey(User, on_delete = models.CASCADE)
     is_done = models.BooleanField(default = False)
     creation_datetime = models.DateTimeField()
-    chore_text = models.CharField(max_length = 256)
+    chore_description = models.CharField(max_length = 256)
